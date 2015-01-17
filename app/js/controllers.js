@@ -2,4 +2,4 @@
 
 /* Controllers */
 
-var zso01Controllers = angular.module('zso01Controllers', []);
+var zso02Controllers = angular.module('zso02Controllers', []);

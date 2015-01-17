@@ -1,2 +1,8 @@
+
+# project
 app/bower_components/
+node_modules/
+
+# IDE
+.idea/
 
