@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="../bower_components/html5shiv/dist/html5shiv.min.js"></script>
-    <script src="../bower_components/respond/dest/respond.min.js"></script>
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/app.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="../bower_components/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 </head>
 <body ng-app="zsoApp">
@@ -54,11 +54,11 @@
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
-                <div ng-controller="ZsoTwitterController">
+                <div ng-controller="ZsoGithubSearchControllerMock">
                     <input type="text" ng-model="searchTerm" placeholder="Search term">
                     <button ng-click="search()">Search</button>
-                    <ul ng-repeat="tweet in searchResult.results">
-                        <li>{{tweet.text}}</li>
+                    <ul ng-repeat="result in searchResult.data">
+                        <li>{{result.name}}</li>
                     </ul>
                 </div>
             </div>
