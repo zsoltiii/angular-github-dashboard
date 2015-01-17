@@ -1,7 +1,8 @@
 
 # project
-app/bower_components/
+bower_components/
 node_modules/
+npm-debug.log
 
 # IDE
 .idea/
