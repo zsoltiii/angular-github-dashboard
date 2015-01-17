@@ -18,7 +18,7 @@
     <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="zsoApp">
+<body ng-app="zsoApp" ng-controller="ZsoGithubSearchControllerMock">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -33,16 +33,16 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
-                        <input type="text" placeholder="search" class="form-control">
+                        <input type="text" ng-model="searchTerm" placeholder="search" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-success">Search</button>
+                    <button type="submit" ng-click="search()" class="btn btn-success">Search</button>
                 </form>
             </div><!--/.navbar-collapse -->
         </div>
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" ng-hide="hideJumbotronWelcome">
         <div class="container">
             <h1>Hello, world!</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -50,20 +50,21 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="main-container">
+
+        <div class="container">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-align-left"></span> Panel title
+                            <span class="glyphicon glyphicon-align-left"></span> Repositories
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div ng-controller="ZsoGithubSearchControllerMock">
-                            <input type="text" ng-model="searchTerm" placeholder="Search term">
-                            <button ng-click="search()">Search</button>
+                        <div>
+
                             <ul ng-repeat="result in searchResult.data">
                                 <li>{{result.name}}</li>
                             </ul>
@@ -100,6 +101,7 @@
         <footer>
             <p>&copy; Company 2014</p>
         </footer>
+        </div>
     </div> <!-- /container -->
     <div ng-view></div>
 

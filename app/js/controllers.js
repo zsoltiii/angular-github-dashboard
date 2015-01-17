@@ -36,6 +36,7 @@ zsoControllers.controller('ZsoGithubSearchController', ['$scope', '$resource',
 
         $scope.search = function() {
             $scope.searchResult = GithubSearchAPI.get();
+            $scope.hideJumbotronWelcome = true;
         };
     }
 ]);
@@ -48,6 +49,7 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
 
         $scope.search = function() {
             $scope.searchResult = GithubSearchAPI.get();
+            $scope.hideJumbotronWelcome = true;
         };
 
         $scope.something = 'Hello!';
