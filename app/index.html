@@ -46,7 +46,7 @@
         <div class="container">
             <h1>Hello, world!</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Project on Github &raquo;</a></p>
         </div>
     </div>
 
@@ -54,17 +54,46 @@
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
-                <div ng-controller="ZsoGithubSearchControllerMock">
-                    <input type="text" ng-model="searchTerm" placeholder="Search term">
-                    <button ng-click="search()">Search</button>
-                    <ul ng-repeat="result in searchResult.data">
-                        <li>{{result.name}}</li>
-                    </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-align-left"></span> Panel title
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-controller="ZsoGithubSearchControllerMock">
+                            <input type="text" ng-model="searchTerm" placeholder="Search term">
+                            <button ng-click="search()">Search</button>
+                            <ul ng-repeat="result in searchResult.data">
+                                <li>{{result.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-align-left"></span> Panel title
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        panel content
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <span class="glyphicon glyphicon-list"></span> Panel title
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        panel content
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
