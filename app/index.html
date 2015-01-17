@@ -65,7 +65,7 @@
                     <div class="panel-body">
                         <div>
 
-                            <ul ng-repeat="result in searchResult.data">
+                            <ul ng-repeat="result in searchReposResult.data">
                                 <li>{{result.name}}</li>
                             </ul>
                         </div>
@@ -76,11 +76,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-align-left"></span> Panel title
+                            <span class="glyphicon glyphicon-user"></span> User
                         </h3>
                     </div>
                     <div class="panel-body">
-                        panel content
+                        <div>
+                            <div>Name: {{searchUserResult.login}}</div>
+
+                        </div>
                     </div>
                 </div>
             </div>

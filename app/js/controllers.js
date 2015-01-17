@@ -4,18 +4,6 @@
 
 var zsoControllers = angular.module('zsoControllers', ["ngResource"]);
 
-zsoControllers.controller('ZsoTwitterController', ['$scope', '$resource',
-    function($scope, $resource) {
-        var TwitterAPI = $resource("http://search.twitter.com/search.json",
-            { callback: "JSON_CALLBACK" },
-            { get: { method: "JSONP" }});
-
-        $scope.search = function() {
-            $scope.searchResult = TwitterAPI.get({ q: $scope.searchTerm });
-        };
-    }
-]);
-
 zsoControllers.controller('ZsoGithubSearchController', ['$scope', '$resource',
     function($scope, $resource) {
         var GithubSearchAPI = $resource(
@@ -43,13 +31,18 @@ zsoControllers.controller('ZsoGithubSearchController', ['$scope', '$resource',
 
 zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource',
     function($scope, $resource) {
-        var GithubSearchAPI = $resource(
-            'js/github.json'
+        var GithubSearchReposAPI = $resource(
+            'js/repos.json'
+        );
+
+        var GithubSearchUserAPI = $resource(
+            'js/user.json'
         );
 
         $scope.search = function() {
-            $scope.searchResult = GithubSearchAPI.get();
             $scope.hideJumbotronWelcome = true;
+            $scope.searchReposResult = GithubSearchReposAPI.get();
+            $scope.searchUserResult = GithubSearchUserAPI.get();
         };
 
         $scope.something = 'Hello!';
