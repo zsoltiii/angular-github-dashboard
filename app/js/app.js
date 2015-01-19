@@ -2,8 +2,9 @@
 
 // Declare app level module which depends on views, and components
 var zsoApp = angular.module('zsoApp', [
-  'ngRoute',
-  'zsoControllers'
+    'ngRoute',
+    'zsoServices',
+    'zsoControllers'
 ]);
 
 zsoApp.config(['$routeProvider', function($routeProvider) {

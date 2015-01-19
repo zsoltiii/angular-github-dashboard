@@ -17,7 +17,8 @@ zsoControllers.controller('ZsoGithubSearchController', ['$scope', '$resource',
                 'per_page': 10
             }, {
                 'get': {
-                    'method': 'JSONP'
+                    'method': 'JSONP',
+                    'cache': true
                 }
             }
         );
@@ -43,6 +44,26 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
             $scope.hideJumbotronWelcome = true;
             $scope.searchReposResult = GithubSearchReposAPI.get();
             $scope.searchUserResult = GithubSearchUserAPI.get();
+        };
+
+        $scope.something = 'Hello!';
+    }
+]);
+
+zsoControllers.controller('ZsoGithubSearchControllerService', ['$scope', 'GithubUser', '$resource',
+    function($scope, GithubUser, $resource) {
+
+        var GithubSearchReposAPI = $resource(
+            'js/repos.json'
+        );
+
+        $scope.search = function() {
+            $scope.hideJumbotronWelcome = true;
+            $scope.searchReposResult = GithubSearchReposAPI.get();
+            var searchUserResult = GithubUser.find().$promise.then(function(searchUserResult) {
+                $scope.searchUserResult = searchUserResult.data;
+            });
+
         };
 
         $scope.something = 'Hello!';

@@ -11,6 +11,7 @@
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
     <script src="js/app.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -18,7 +19,7 @@
     <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="zsoApp" ng-controller="ZsoGithubSearchControllerMock">
+<body ng-app="zsoApp" ng-controller="ZsoGithubSearchControllerService">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -54,56 +55,87 @@
 
         <div class="container">
         <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-align-left"></span> Repositories
-                        </h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <div>
-
-                            <ul ng-repeat="result in searchReposResult.data">
-                                <li>{{result.name}}</li>
-                            </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-user"></span> User
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div>
-                            <div>Name: {{searchUserResult.login}}</div>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-align-left"></span> Repositories
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
+
+                                <a href="#" class="list-group-item" ng-repeat="result in searchReposResult.data">
+                                    <li>{{result.name}}</li>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-user"></span> User
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <div>Name: {{searchUserResult.name}}</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-list"></span> Panel title
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            panel content
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <span class="glyphicon glyphicon-list"></span> Panel title
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        panel content
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <footer>
-            <p>&copy; Company 2014</p>
-        </footer>
+            <hr>
+            <footer>
+                <p>&copy; Company 2014</p>
+            </footer>
         </div>
     </div> <!-- /container -->
     <div ng-view></div>
