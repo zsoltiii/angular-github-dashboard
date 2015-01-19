@@ -8,3 +8,7 @@ body {
 .main-container {
     padding-top: 20px;
 }
+
+.col-md-3 .panel {
+    height: 120px;
+}

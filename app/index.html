@@ -57,16 +57,31 @@
         <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-3">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"></h3>
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-user"></span> Github User
+                            </h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div>
+                                <span><img ng-src="{{searchUserResult.avatar_url}}" style="width:40px;height:40px;"/></span>
+                                <span><strong>{{searchUserResult.name}}</strong></span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"></h3>
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-eye-open"></span> Public Repos
+                            </h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div class="row">
+                                <h3>{{searchUserResult.public_repos}}</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +113,7 @@
                             <div class="list-group">
 
                                 <a href="#" class="list-group-item" ng-repeat="result in searchReposResult.data">
-                                    <li>{{result.name}}</li>
+                                    {{result.name}}
                                 </a>
                             </div>
                         </div>
