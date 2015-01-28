@@ -19,7 +19,7 @@
     <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="zsoApp" ng-controller="ZsoGithubSearchControllerService">
+<body ng-app="zsoApp" ng-controller="ZsoGithubSearchControllerMock">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -43,7 +43,7 @@
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron" ng-hide="hideJumbotronWelcome">
+    <div class="jumbotron" ng-hide="searchMode">
         <div class="container">
             <h1>Hello, world!</h1>
             <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
@@ -103,7 +103,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <span class="glyphicon glyphicon-align-left"></span> Repositories
@@ -112,24 +112,36 @@
                         <div class="panel-body">
                             <div class="list-group">
 
-                                <a href="#" class="list-group-item" ng-repeat="result in searchReposResult.data">
-                                    {{result.name}}
+                                <a href="#"
+                                   class="list-group-item"
+                                   ng-repeat="repo in searchReposResult.data"
+                                   ng-click="showRepoDetails(repo)">
+                                    {{repo.name}}
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <span class="glyphicon glyphicon-user"></span> User
+                                <span class="glyphicon glyphicon-user"></span> Repository details
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div>
-                                <div>Name: {{searchUserResult.name}}</div>
-
+                            <div class="list-group" ng-show="repoDetails">
+                                <div class="list-group-item"><strong>{{repoDetails.full_name}}</strong></div>
+                                <div class="list-group-item">
+                                    <a href="{{repoDetails.clone_url}}" target="_blank"> <button class="btn btn-info">clone</button></a>
+                                    <a href="{{repoDetails.forks_url}}" target="_blank"> <button class="btn btn-info">fork <span class="badge">{{repoDetails.forks_count}}</span></button></a>
+                                </div>
+                                <div class="list-group-item"><strong>Private</strong> {{repoDetails.private}}</div>
+                                <div class="list-group-item"><strong>Link</strong> {{repoDetails.html_url}}</div>
+                                <div class="list-group-item"><strong>Created</strong> {{repoDetails.created_at | date:'yyyy-MM-dd HH:mm'}}</div>
+                                <div class="list-group-item"><strong>Updated</strong> {{repoDetails.updated_at | date:'yyyy-MM-dd HH:mm'}}</div>
+                                <div class="list-group-item"><strong>Open Issues</strong><span class="badge left">{{repoDetails.open_issues}}</span> </div>
+                                <div class="list-group-item"><strong>watchers</strong><span class="badge left">{{repoDetails.watchers}}</span> </div>
                             </div>
                         </div>
                     </div>
