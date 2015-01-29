@@ -50,7 +50,7 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
 
         $scope.search = function() {
             $scope.searchMode = true;
-            $scope.searchReposResult = GithubSearchReposAPI.get();
+            $scope.searchReposResult = GithubSearchReposAPI.get().data; // added data to match real API response
             $scope.searchUserResult = GithubSearchUserAPI.get();
         };
 
@@ -76,21 +76,45 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
     }
 ]);
 
-zsoControllers.controller('ZsoGithubSearchControllerService', ['$scope', 'GithubUser', '$resource',
-    function($scope, GithubUser, $resource) {
-
-        var GithubSearchReposAPI = $resource(
-            'js/repos.json'
-        );
-
+zsoControllers.controller('GithubSearchService' , ['$scope', 'Github',
+    function($scope, Github) {
         $scope.search = function() {
             $scope.searchMode = true;
-            $scope.searchReposResult = GithubSearchReposAPI.get();
-            var searchUserResult = GithubUser.find().$promise.then(function(searchUserResult) {
-                $scope.searchUserResult = searchUserResult.data;
+
+            var searchUserResult = Github.getUser($scope.searchTerm).$promise.then(function(searchResult) {
+                $scope.searchUserResult = searchResult.data;
             });
 
-        };
+            var searchReposResult = Github.getRepos($scope.searchTerm).$promise.then(function(searchResult) {
+                $scope.searchReposResult = searchResult;
+            });
+        }
+
+        $scope.showRepoDetails = function(repo) {
+            $scope.repoDetails = repo;
+        }
+
+        $scope.showIssues = function(repoName) {
+            var searchIssuesResult = Github.getIssues($scope.searchTerm, $scope.repoDetails.name).$promise.then(function(searchResult) {
+                $scope.searchIssuesResult = searchResult;
+            });
+
+            $scope.showIssuesPanel = true;
+            $scope.showWatchersPanel = false;
+        }
+
+        $scope.showWatchers = function(repoName) {
+            var searchWatchersResult = Github.getWatchers($scope.searchTerm, $scope.repoDetails.name).$promise.then(function(searchResult) {
+                $scope.searchWatchersResult = searchResult;
+            });
+
+            $scope.showIssuesPanel = false;
+            $scope.showWatchersPanel = true;
+        }
+
+        $scope.isIssuesWatchersPanel = function () {
+            return ($scope.showIssuesPanel || $scope.showWatchersPanel)
+        }
     }
 ]);
 
