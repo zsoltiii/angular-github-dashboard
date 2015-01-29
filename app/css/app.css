@@ -12,3 +12,13 @@ body {
 .col-md-3 .panel {
     height: 120px;
 }
+
+.project-button-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.panel-body {
+    max-height: 500px;
+    overflow-y: auto;
+}

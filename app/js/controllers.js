@@ -40,6 +40,14 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
             'js/user.json'
         );
 
+        var GithubSearchIssuesAPI = $resource(
+            'js/issues.json'
+        );
+
+        var GithubSearchWatchersAPI = $resource(
+            'js/watchers.json'
+        );
+
         $scope.search = function() {
             $scope.searchMode = true;
             $scope.searchReposResult = GithubSearchReposAPI.get();
@@ -48,6 +56,22 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
 
         $scope.showRepoDetails = function(repo) {
             $scope.repoDetails = repo;
+        }
+
+        $scope.showIssues = function(repoName) {
+            $scope.searchIssuesResult = GithubSearchIssuesAPI.get(); // pass in repoName
+            $scope.showIssuesPanel = true;
+            $scope.showWatchersPanel = false;
+        }
+
+        $scope.showWatchers = function(repoName) {
+            $scope.searchWatchersResult = GithubSearchWatchersAPI.get(); // pass in repoName
+            $scope.showIssuesPanel = false;
+            $scope.showWatchersPanel = true;
+        }
+
+        $scope.isIssuesWatchersPanel = function () {
+            return ($scope.showIssuesPanel || $scope.showWatchersPanel)
         }
     }
 ]);

@@ -29,7 +29,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">Simple GitHub AngularJS Dashboard</a>
+            </div>
+            <div class="navbar-header project-button-header" ng-show="searchMode">
+                <a class="btn btn-default btn-sm" href="#" role="button">Project on Github &raquo;</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
@@ -45,8 +48,9 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" ng-hide="searchMode">
         <div class="container">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <h1>Hello, Angular lovers!</h1>
+            <p>This is a very simple demo project to showcase how we can build a single page dashboard application with AngularJS to discover interesting stuff about GitHub repositories or users.</p>
+            <p>Please start with searching for a user in the top right corner of this page (hint: angular)!</p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Project on Github &raquo;</a></p>
         </div>
     </div>
@@ -56,7 +60,7 @@
         <div class="container">
         <!-- Example row of columns -->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" ng-show="searchUserResult">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -71,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" ng-show="searchUserResult">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -85,24 +89,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
+                <div class="col-md-3" ng-show="searchUserResult">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"></h3>
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon glyphicon-thumbs-up"></span> Followers
+                            </h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div class="row">
+                                <h3>{{searchUserResult.followers}}</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="panel panel-default">
+                <div class="col-md-3" ng-show="searchUserResult">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"></h3>
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon glyphicon-hand-up"></span> Following
+                            </h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <div class="row">
+                                <h3>{{searchUserResult.following}}</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="searchReposResult">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -111,7 +129,6 @@
                         </div>
                         <div class="panel-body">
                             <div class="list-group">
-
                                 <a href="#"
                                    class="list-group-item"
                                    ng-repeat="repo in searchReposResult.data"
@@ -122,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-show="repoDetails">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -130,31 +147,61 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="list-group" ng-show="repoDetails">
-                                <div class="list-group-item"><strong>{{repoDetails.full_name}}</strong></div>
+                            <div class="list-group">
+                                <div class="list-group-item list-group-item-heading list-group-item-success"><strong>{{repoDetails.full_name}}</strong></div>
                                 <div class="list-group-item">
-                                    <a href="{{repoDetails.clone_url}}" target="_blank"> <button class="btn btn-info">clone</button></a>
-                                    <a href="{{repoDetails.forks_url}}" target="_blank"> <button class="btn btn-info">fork <span class="badge">{{repoDetails.forks_count}}</span></button></a>
+                                    <a href="{{repoDetails.clone_url}}" target="_blank"> <button class="btn btn-info">clone URL</button></a>
+                                    <a href="{{repoDetails.url}}/fork" target="_blank"> <button class="btn btn-info">fork <span class="badge">{{repoDetails.forks_count}}</span></button></a>
                                 </div>
                                 <div class="list-group-item"><strong>Private</strong> {{repoDetails.private}}</div>
                                 <div class="list-group-item"><strong>Link</strong> {{repoDetails.html_url}}</div>
                                 <div class="list-group-item"><strong>Created</strong> {{repoDetails.created_at | date:'yyyy-MM-dd HH:mm'}}</div>
                                 <div class="list-group-item"><strong>Updated</strong> {{repoDetails.updated_at | date:'yyyy-MM-dd HH:mm'}}</div>
-                                <div class="list-group-item"><strong>Open Issues</strong><span class="badge left">{{repoDetails.open_issues}}</span> </div>
-                                <div class="list-group-item"><strong>watchers</strong><span class="badge left">{{repoDetails.watchers}}</span> </div>
+                                <div class="list-group-item">
+                                    <a href="#" ng-click="showIssues(repo)">
+                                        <strong>Open Issues</strong> <span class="badge left">{{repoDetails.open_issues}}</span>
+                                    </a>
+                                </div>
+                                <div class="list-group-item">
+                                    <a href="#" ng-click="showWatchers(repo)">
+                                        <strong>Watchers</strong> <span class="badge left">{{repoDetails.watchers}}</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
+                <div class="col-md-4" ng-show="isIssuesWatchersPanel()">
+                    <div class="panel panel-primary" ng-if="showIssuesPanel">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <span class="glyphicon glyphicon-list"></span> Panel title
+                                <span class="glyphicon glyphicon-list"></span> Issues
                             </h3>
                         </div>
                         <div class="panel-body">
-                            panel content
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item"
+                                   ng-repeat="issue in searchIssuesResult.data">
+                                    <strong>{{issue.number}}</strong> {{issue.title}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary" ng-if="showWatchersPanel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <span class="glyphicon glyphicon-list"></span> Watchers
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#"
+                                   class="list-group-item"
+                                   ng-repeat="watcher in searchWatchersResult.data">
+                                    <strong>{{watcher.login}}</strong> {{watcher.html_url}}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,7 +212,5 @@
             </footer>
         </div>
     </div> <!-- /container -->
-    <div ng-view></div>
-
 </body>
 </html>
