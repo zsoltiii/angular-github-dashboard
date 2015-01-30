@@ -135,6 +135,7 @@
                                    ng-click="showRepoDetails(repo)">
                                     {{repo.name}}
                                 </a>
+                                <span ng-hide="{{searchReposResult.data.length}}">No public repos</span>
                             </div>
                         </div>
                     </div>
@@ -148,15 +149,13 @@
                         </div>
                         <div class="panel-body">
                             <div class="list-group">
-                                <div class="list-group-item list-group-item-heading list-group-item-success"><strong>{{repoDetails.full_name}}</strong></div>
+                                <div class="list-group-item list-group-item-heading list-group-item-success">
+                                    <a ng-href="{{repoDetails.html_url}}" target="_blank"><strong>{{repoDetails.full_name}}</strong></a>
+                                </div>
                                 <div class="list-group-item">
                                     <a href="{{repoDetails.clone_url}}" target="_blank"> <button class="btn btn-info">clone URL</button></a>
                                     <a href="{{repoDetails.url}}/fork" target="_blank"> <button class="btn btn-info">fork <span class="badge">{{repoDetails.forks_count}}</span></button></a>
                                 </div>
-                                <div class="list-group-item"><strong>Private</strong> {{repoDetails.private}}</div>
-                                <div class="list-group-item"><strong>Link</strong> {{repoDetails.html_url}}</div>
-                                <div class="list-group-item"><strong>Created</strong> {{repoDetails.created_at | date:'yyyy-MM-dd HH:mm'}}</div>
-                                <div class="list-group-item"><strong>Updated</strong> {{repoDetails.updated_at | date:'yyyy-MM-dd HH:mm'}}</div>
                                 <div class="list-group-item">
                                     <a href="#" ng-click="showIssues(repo)">
                                         <strong>Open Issues</strong> <span class="badge left">{{repoDetails.open_issues}}</span>
@@ -167,6 +166,9 @@
                                         <strong>Watchers</strong> <span class="badge left">{{repoDetails.watchers}}</span>
                                     </a>
                                 </div>
+                                <div class="list-group-item"><strong>Created</strong> {{repoDetails.created_at | date:'yyyy-MM-dd HH:mm'}}</div>
+                                <div class="list-group-item"><strong>Updated</strong> {{repoDetails.updated_at | date:'yyyy-MM-dd HH:mm'}}</div>
+                                <div class="list-group-item"><strong>Private</strong> {{repoDetails.private}}</div>
                             </div>
                         </div>
                     </div>
@@ -179,13 +181,11 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#"
-                                   class="list-group-item"
-                                   ng-repeat="issue in searchIssuesResult.data">
-                                    <strong>{{issue.number}}</strong> {{issue.title}}
-                                </a>
-                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="issue in searchIssuesResult.data">
+                                    <a ng-href="{{issue.html_url}}" target="_blank">{{issue.title}}</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="panel panel-primary" ng-if="showWatchersPanel">
@@ -195,13 +195,12 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#"
-                                   class="list-group-item"
-                                   ng-repeat="watcher in searchWatchersResult.data">
-                                    <strong>{{watcher.login}}</strong> {{watcher.html_url}}
-                                </a>
-                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="watcher in searchWatchersResult.data">
+                                    <img ng-src="{{watcher.avatar_url}}" alt="{{watcher.login}}" style="width:30px;height:30px;"/>
+                                    <a ng-href="{{watcher.html_url}}" target="_blank">{{watcher.login}}</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

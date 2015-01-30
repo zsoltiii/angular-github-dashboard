@@ -80,6 +80,9 @@ zsoControllers.controller('GithubSearchService' , ['$scope', 'Github',
     function($scope, Github) {
         $scope.search = function() {
             $scope.searchMode = true;
+            $scope.repoDetails = false;
+            $scope.showIssuesPanel = false;
+            $scope.showWatchersPanel = false;
 
             var searchUserResult = Github.getUser($scope.searchTerm).$promise.then(function(searchResult) {
                 $scope.searchUserResult = searchResult.data;
@@ -91,6 +94,8 @@ zsoControllers.controller('GithubSearchService' , ['$scope', 'Github',
         }
 
         $scope.showRepoDetails = function(repo) {
+            $scope.showIssuesPanel = false;
+            $scope.showWatchersPanel = false;
             $scope.repoDetails = repo;
         }
 
