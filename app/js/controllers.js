@@ -2,9 +2,9 @@
 
 /* Controllers */
 
-var zsoControllers = angular.module('zsoControllers', ["ngResource"]);
+var appControllers = angular.module('appControllers', ["ngResource"]);
 
-zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource',
+appControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource',
     function($scope, $resource) {
         var GithubSearchReposAPI = $resource(
             'js/repos.json'
@@ -50,7 +50,7 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
     }
 ]);
 
-zsoControllers.controller('GithubSearchService' , ['$scope', 'Github',
+appControllers.controller('GithubSearchService' , ['$scope', 'Github',
     function($scope, Github) {
         $scope.search = function() {
             $scope.loading = true;

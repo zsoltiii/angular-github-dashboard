@@ -2,9 +2,9 @@
 
 /* Services */
 
-var zsoServices = angular.module('zsoServices', ["ngResource"]);
+var appServices = angular.module('appServices', ["ngResource"]);
 
-zsoServices.factory('Github', ['$resource', function($resource) {
+appServices.factory('Github', ['$resource', function($resource) {
 
     var Github = $resource(
         'https://api.github.com/:query/:user/:repo/:spec',
