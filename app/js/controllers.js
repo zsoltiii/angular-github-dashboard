@@ -79,13 +79,24 @@ zsoControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
 zsoControllers.controller('GithubSearchService' , ['$scope', 'Github',
     function($scope, Github) {
         $scope.search = function() {
+            $scope.loading = true;
             $scope.searchMode = true;
             $scope.repoDetails = false;
             $scope.showIssuesPanel = false;
             $scope.showWatchersPanel = false;
 
             var searchUserResult = Github.getUser($scope.searchTerm).$promise.then(function(searchResult) {
+                console.log(searchResult);
+                if (searchResult.meta.status == 403) {
+                    $scope.showAPIAccessError = true;
+                    $scope.showAPIErrorDetails = searchResult.data.message;
+                }
                 $scope.searchUserResult = searchResult.data;
+            }, function(error) {
+                $scope.showAPIAccessError = true;
+            })
+            .finally(function() {
+                $scope.loading = false;
             });
 
             var searchReposResult = Github.getRepos($scope.searchTerm).$promise.then(function(searchResult) {

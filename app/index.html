@@ -59,7 +59,21 @@
 
         <div class="container">
         <!-- Example row of columns -->
-            <div class="row">
+            <div class="row" ng-show="showAPIAccessError">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Warning! Something went wrong with the connection to the Github API.</strong>
+                    <p>Unfortunately Github API only allows certain number of API calls in a given period of time for unauthenticated users / apps. Which is the case with this demo. Please try again later.</p>
+                    <p>{{showAPIErrorDetails}}</p>
+                </div>
+            </div>
+            <div class="row" ng-show="loading">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Waiting on promises... </strong>
+                </div>
+            </div>
+            <div class="row" ng-hide="showAPIAccessError">
                 <div class="col-md-3" ng-show="searchUserResult">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -119,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-hide="showAPIAccessError">
                 <div class="col-md-4" ng-show="searchReposResult">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
