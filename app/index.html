@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>zso01 AngularJS App</title>
+    <title>Simple GitHub AngularJS Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
@@ -19,7 +19,7 @@
     <script src="../bower_components/respond/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="zsoApp" ng-controller="GithubSearchService">
+<body ng-app="zsoGithubDashboard" ng-controller="GithubSearchService">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -41,11 +41,10 @@
                     </div>
                     <button type="submit" ng-click="search()" class="btn btn-success">Search</button>
                 </form>
-            </div><!--/.navbar-collapse -->
+            </div>
         </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" ng-hide="searchMode">
         <div class="container">
             <h1>Hello, Angular lovers!</h1>
@@ -58,7 +57,6 @@
     <div class="main-container">
 
         <div class="container">
-        <!-- Example row of columns -->
             <div class="row" ng-show="showAPIAccessError">
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -224,6 +222,6 @@
                 <!--<p>2015 <a href="https://github.com/zsoltiii" target="_blank">Zsolt Szalai</a></p>-->
             </footer>
         </div>
-    </div> <!-- /container -->
+    </div>
 </body>
 </html>
