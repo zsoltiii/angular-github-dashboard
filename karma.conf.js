@@ -1,14 +1,14 @@
 module.exports = function(config){
   config.set({
 
-    basePath : './',
+    basePath : '../',
 
     files : [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-route/angular-route.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/components/**/*.js',
-      'app/view*/**/*.js'
+        'bower_components/angular/angular.js',
+        'bower_components/angular-route/angular-route.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'app/js/**/*.js',
+        'tests/unit/**/*.js'
     ],
 
     autoWatch : true,
@@ -28,6 +28,5 @@ module.exports = function(config){
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
     }
-
   });
 };
