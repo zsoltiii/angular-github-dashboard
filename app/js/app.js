@@ -1,6 +1,6 @@
 'use strict';
 
-var zsoGithubDashboard = angular.module('zsoGithubDashboard', [
+var angularGithubDashboard = angular.module('angularGithubDashboard', [
     'appServices',
     'appControllers'
 ]);

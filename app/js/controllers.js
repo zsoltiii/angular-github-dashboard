@@ -4,7 +4,7 @@
 
 var appControllers = angular.module('appControllers', ["ngResource"]);
 
-appControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource',
+appControllers.controller('GithubSearchControllerMock', ['$scope', '$resource',
     function($scope, $resource) {
         var GithubSearchReposAPI = $resource(
             'js/repos.json'
@@ -50,7 +50,7 @@ appControllers.controller('ZsoGithubSearchControllerMock', ['$scope', '$resource
     }
 ]);
 
-appControllers.controller('GithubSearchService' , ['$scope', 'Github',
+appControllers.controller('GithubSearchController' , ['$scope', 'Github',
     function($scope, Github) {
         $scope.search = function() {
             $scope.loading = true;

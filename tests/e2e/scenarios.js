@@ -2,14 +2,14 @@
 
 /* https://github.com/angular/protractor/blob/master/docs/toc.md */
 
-describe('zsoGithubDashboard', function() {
+describe('angularGithubDashboard', function() {
 
     beforeEach(function() {
         browser.get('app/');
     });
 
-    it('should render page title as Simple GitHub AngularJS Dashboard', function() {
-        expect(browser.getTitle()).toBe('Simple GitHub AngularJS Dashboard');
+    it('should render page title as Simple AngularJS GitHub Dashboard', function() {
+        expect(browser.getTitle()).toBe('Simple AngularJS GitHub Dashboard');
     });
 
     it('should have navbar', function() {
